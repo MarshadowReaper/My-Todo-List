@@ -1,7 +1,16 @@
-Hello there viewer! This is the To-do app. This little app will teach you how to code using react and what things you can do to properly prepare you and help you learn and understand the material as you go.
+# React + Vite
 
-Now first things first, you need to learn how to install tools such as this lovely little template and to keep you from running all over the web trying to figure out what do you need like I have, I will tell you.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-First you will need to have access to Node.js before getting started on installing a template. Without it, your terminal won't recognize anything of what you'll do next. Second after installing the Node.js you will need to open up the terminal and type "npx create-vite@latest —template react ." It will ask you to name the template, next select "React" then select "Javascript" and lastly it will ask to install npm, pick "yes" and then you have successfully installed the template.
+Currently, two official plugins are available:
 
-Now then lastly. You will need to do some cleaning from App.css, App.jsx, and index.css, however, in App.jsx you should leave only the import for App.css , the function App, return function and the export default app. From there you are all set to start developing software with react
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+
+## React Compiler
+
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
