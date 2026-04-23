@@ -23,5 +23,9 @@ function App() {
 }
 //<TodoList todoList={todoList} /> This is managing and passing data down to children
 export default App;
+<<<<<<< HEAD
 
 //Programmer's note: I had a LOT of troubleshooting to do with this one so figured to help understand the lesson better I should label what role the codes are playing
+=======
+// hopefully it works
+>>>>>>> 50e9d9faa8e78db1fcf146434eeb4206c8e27f56
