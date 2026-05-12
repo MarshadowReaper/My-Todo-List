@@ -1,4 +1,6 @@
 import TodoListItem from "./TodoListItem.jsx";
+
+//This is holding the data
 function TodoList({ todoList }) {
   // recieves data
   return (
