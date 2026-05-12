@@ -10,11 +10,27 @@ const todos = [
 function App() {
   const [todoList, setTodoList] = useState(todos);
   //This is how to create a state
+  function addTodo(todoTitle) {
+    const toDo = { id: Date.now(), title: todoTitle, isCompleted: false };
+
+    setTodoList((previous) => [toDo, ...previous]);
+  }
+  function completeTodo(id) {
+    const updatedList = todoList.map((todo) => {
+      if (todo.id === id) {
+        return { ...todo, isCompleted: true };
+      } else {
+        return todo;
+      }
+    });
+    setTodoList(updatedList);
+  }
+
   return (
     <div>
       <h1> My Todos </h1>
-      <TodoForm />
-      <TodoList todoList={todoList} />
+      <TodoForm onAddTodo={addTodo} />
+      <TodoList todoList={todoList} onCompleteTodo={completeTodo} />
     </div>
   );
 }
