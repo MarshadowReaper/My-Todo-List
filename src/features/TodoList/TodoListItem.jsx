@@ -34,7 +34,7 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
             Cancel
           </button>
           <button
-            type="button"
+            type="submit"
             onClick={handleUpdate}
             disabled={!isValidTodoTitle(workingTitle)}
           >
@@ -45,6 +45,7 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
         <>
           <input
             type="checkbox"
+            id={`checkbox${todo.id}`}
             checked={todo.isCompleted}
             onChange={() => onCompleteTodo(todo.id)}
           />
