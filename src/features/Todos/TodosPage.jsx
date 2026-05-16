@@ -73,7 +73,7 @@ function TodosPage({ token }) {
     }
   }
 
-  function completeTodo(id) {
+  async function completeTodo(id) {
     const updatedList = todoList.map((todo) => {
       if (todo.id === id) {
         return { ...todo, isCompleted: true };
@@ -82,8 +82,20 @@ function TodosPage({ token }) {
       }
     });
     setTodoList(updatedList);
+
+    await fetch(`/api/tasks/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-TOKEN": token,
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        isCompleted: true,
+      }),
+    });
   }
-  const updateTodo = (editedTodo) => {
+  const updateTodo = async (editedTodo) => {
     const updatedTodos = todoList.map((todo) => {
       if (todo.id === editedTodo.id) {
         return { ...editedTodo };
@@ -92,8 +104,19 @@ function TodosPage({ token }) {
     });
 
     setTodoList(updatedTodos);
+    await fetch(`/api/tasks/${editedTodo.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-TOKEN": token,
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        title: editedTodo.title,
+        isCompleted: editedTodo.isCompleted,
+      }),
+    });
   };
-
   useEffect(() => {
     if (!token) return;
 
