@@ -74,7 +74,8 @@ function TodosPage({ token }) {
   }
 
   async function completeTodo(id) {
-    const original = todoList;
+    const originalTodo = todoList.find((t) => t.id === id);
+    const original = [...todoList];
     const updatedList = todoList.map((todo) => {
       if (todo.id === id) {
         return { ...todo, isCompleted: true };
@@ -94,6 +95,7 @@ function TodosPage({ token }) {
         credentials: "include",
         body: JSON.stringify({
           isCompleted: true,
+          createdAt: originalTodo.createdAt,
         }),
       });
 
@@ -107,7 +109,8 @@ function TodosPage({ token }) {
   }
 
   const updateTodo = async (editedTodo) => {
-    const original = todoList;
+    const originalTodo = todoList.find((t) => t.id === editedTodo.id);
+    const original = [...todoList];
     const updatedTodos = todoList.map((todo) => {
       if (todo.id === editedTodo.id) {
         return { ...editedTodo };
@@ -127,6 +130,7 @@ function TodosPage({ token }) {
         body: JSON.stringify({
           title: editedTodo.title,
           isCompleted: editedTodo.isCompleted,
+          createdAt: originalTodo.createdAt,
         }),
       });
 
