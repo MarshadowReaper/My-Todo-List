@@ -2,9 +2,12 @@ import Header from "./shared/Header.jsx";
 import Logon from "./features/Logon.jsx";
 import TodosPage from "./features/Todos/TodosPage.jsx";
 import { useState } from "react";
-
-//This is holding the data
-
+const todos = [
+  { id: 1, title: "review resources" },
+  { id: 2, title: "take notes" },
+  { id: 3, title: "code out app" },
+  { id: 4, title: "take quizes" },
+];
 function App() {
   const [email, setEmail] = useState("");
   const [token, setToken] = useState();
