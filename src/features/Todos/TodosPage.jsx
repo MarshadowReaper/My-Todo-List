@@ -74,6 +74,7 @@ function TodosPage({ token }) {
   }
 
   async function completeTodo(id) {
+    const original = todoList;
     const updatedList = todoList.map((todo) => {
       if (todo.id === id) {
         return { ...todo, isCompleted: true };
@@ -83,19 +84,30 @@ function TodosPage({ token }) {
     });
     setTodoList(updatedList);
 
-    await fetch(`/api/tasks/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRF-TOKEN": token,
-      },
-      credentials: "include",
-      body: JSON.stringify({
-        isCompleted: true,
-      }),
-    });
+    try {
+      const response = await fetch(`/api/tasks/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-TOKEN": token,
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          isCompleted: true,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to complete todo");
+      }
+    } catch (err) {
+      setTodoList(original);
+      setError(err.message);
+    }
   }
+
   const updateTodo = async (editedTodo) => {
+    const original = todoList;
     const updatedTodos = todoList.map((todo) => {
       if (todo.id === editedTodo.id) {
         return { ...editedTodo };
@@ -104,18 +116,25 @@ function TodosPage({ token }) {
     });
 
     setTodoList(updatedTodos);
-    await fetch(`/api/tasks/${editedTodo.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRF-TOKEN": token,
-      },
-      credentials: "include",
-      body: JSON.stringify({
-        title: editedTodo.title,
-        isCompleted: editedTodo.isCompleted,
-      }),
-    });
+    try {
+      const response = await fetch(`/api/tasks/${editedTodo.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-TOKEN": token,
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          title: editedTodo.title,
+          isCompleted: editedTodo.isCompleted,
+        }),
+      });
+
+      if (!response.ok) throw new Error("Failed to update todo");
+    } catch (err) {
+      setTodoList(original);
+      setError(err.message);
+    }
   };
   useEffect(() => {
     if (!token) return;
@@ -125,6 +144,13 @@ function TodosPage({ token }) {
 
   return (
     <>
+      {isTodoListLoading && <p>Loading...</p>}
+      {error && (
+        <div>
+          <p>{error}</p>
+          <button onClick={() => setError("")}>Clear</button>
+        </div>
+      )}
       <TodoForm onAddTodo={addTodo} />
       <TodoList
         todoList={todoList}

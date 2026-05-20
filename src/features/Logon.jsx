@@ -38,6 +38,7 @@ function Logon({ onSetEmail, onSetToken }) {
   };
   return (
     <>
+      {authError && <div role="alert">{authError}</div>}
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
         <input
@@ -46,6 +47,7 @@ function Logon({ onSetEmail, onSetToken }) {
           type="email"
           value={email}
           onChange={handleEmailChange}
+          required
         />
 
         <label htmlFor="password">Password</label>
@@ -55,9 +57,12 @@ function Logon({ onSetEmail, onSetToken }) {
           type="password"
           value={password}
           onChange={handlePasswordChange}
+          required
         />
 
-        <button type="submit">Log In</button>
+        <button type="submit" disabled={isLoggingOn}>
+          {isLoggingOn ? "Logging in..." : "Log On"}
+        </button>
       </form>
     </>
   );
