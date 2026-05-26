@@ -44,7 +44,6 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
             id={`checkbox${todo.id}`}
             checked={todo.isCompleted}
             onChange={() => {
-              console.log("Checkbox clicked", todo.id);
               onCompleteTodo(todo.id);
             }}
           />
