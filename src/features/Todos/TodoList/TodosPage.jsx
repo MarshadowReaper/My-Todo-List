@@ -65,6 +65,7 @@ function TodosPage({ token }) {
       }
 
       if (data.tasks.length === 0) {
+        console.log("FETCH DATA:", data);
         dispatch({
           type: TODO_ACTIONS.FETCH_ERROR,
           payload: {
@@ -262,10 +263,17 @@ function TodosPage({ token }) {
   const showTodos =
     !error && !filterError && !isTodoListLoading && todoList.length > 0;
   console.log({
+    filterTerm,
     debouncedFilterTerm,
+    hasSearch,
+    error,
+    filterError,
+    isTodoListLoading,
     todoListLength: todoList.length,
+    isEmptyApp,
     isNoResults,
   });
+  console.log("TODOS ACTUAL CONTENT:", todoList);
   return (
     <>
       {error && <p>{error}</p>}

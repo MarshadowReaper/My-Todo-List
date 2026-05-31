@@ -26,8 +26,7 @@ function Logon() {
       });
 
       const data = await response.json();
-      console.log("LOGIN RESPONSE:", data);
-      console.log("TOKEN BEING SET:", data.csrfToken);
+
       if (response.status === 200 && data.name && data.csrfToken) {
         setEmail(data.name);
         setToken(data.csrfToken);

@@ -36,7 +36,6 @@ export function todoReducer(state, action) {
         isTodoListLoading: true,
         error: "",
         filterError: "",
-        todoList: [],
       };
 
     case TODO_ACTIONS.FETCH_SUCCESS:
