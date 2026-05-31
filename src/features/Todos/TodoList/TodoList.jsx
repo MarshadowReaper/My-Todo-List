@@ -17,6 +17,7 @@ function TodoList({ todoList, onCompleteTodo, onUpdateTodo, dataVersion }) {
         <p>Add todo above to get started</p>
       ) : (
         <ul>
+          {filteredTodoList.length === 0 && <p>No matching todos found.</p>}
           {filteredTodoList.todos.map((todo) => (
             <TodoListItem
               todo={todo}

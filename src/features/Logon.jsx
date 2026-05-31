@@ -1,6 +1,10 @@
 import { useState } from "react";
-function Logon({ onSetEmail = () => {}, onSetToken = () => {} }) {
-  const [email, setEmail] = useState("");
+import { useAuth } from "../context/AuthContext.jsx";
+
+function Logon() {
+  const { setEmail, setToken } = useAuth();
+
+  const [emailInput, setEmailInput] = useState("");
   const [password, setPassword] = useState("");
   const [authError, setAuthError] = useState("");
   const [isLoggingOn, setIsLoggingOn] = useState(false);
@@ -9,18 +13,24 @@ function Logon({ onSetEmail = () => {}, onSetToken = () => {} }) {
     e.preventDefault();
     setIsLoggingOn(true);
     setAuthError("");
+
     try {
       const response = await fetch("/api/users/logon", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({
+          email: emailInput,
+          password,
+        }),
       });
-      const data = await response.json();
 
+      const data = await response.json();
+      console.log("LOGIN RESPONSE:", data);
+      console.log("TOKEN BEING SET:", data.csrfToken);
       if (response.status === 200 && data.name && data.csrfToken) {
-        onSetEmail(data.name || data.user || data.email || "");
-        onSetToken(data.csrfToken || data.token || data.session || "");
+        setEmail(data.name);
+        setToken(data.csrfToken);
       } else {
         setAuthError(`Authentication failed: ${data?.message}`);
       }
@@ -30,34 +40,27 @@ function Logon({ onSetEmail = () => {}, onSetToken = () => {} }) {
       setIsLoggingOn(false);
     }
   };
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
   return (
     <>
       {authError && <div role="alert">{authError}</div>}
+
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
         <input
           id="email"
-          name="email"
           type="email"
-          value={email}
-          onChange={handleEmailChange}
+          value={emailInput}
+          onChange={(e) => setEmailInput(e.target.value)}
           required
         />
 
         <label htmlFor="password">Password</label>
         <input
           id="password"
-          name="password"
           type="password"
           value={password}
-          onChange={handlePasswordChange}
+          onChange={(e) => setPassword(e.target.value)}
           required
         />
 
