@@ -9,11 +9,13 @@ export const TODO_ACTIONS = {
 
   COMPLETE_TODO_START: "COMPLETE_TODO_START",
   COMPLETE_TODO_SUCCESS: "COMPLETE_TODO_SUCCESS",
+  COMPLETE_TODO_ERROR: "COMPLETE_TODO_ERROR",
 
   UPDATE_TODO_SUCCESS: "UPDATE_TODO_SUCCESS",
   UPDATE_TODO_ERROR: "UPDATE_TODO_ERROR",
   SET_SORT: "SET_SORT",
   SET_FILTER: "SET_FILTER",
+  RESET_FILTERS: "RESET_FILTERS",
   CLEAR_ERROR: "CLEAR_ERROR",
 };
 
@@ -22,8 +24,8 @@ export const initialTodoState = {
   error: "",
   filterError: "",
   isTodoListLoading: true,
-  sortBy: "createdDate",
-  sortDirection: "desc",
+  sortBy: "creationDate",
+  sortDirection: "asc",
   filterTerm: "",
   dataVersion: 0,
 };
@@ -42,7 +44,7 @@ export function todoReducer(state, action) {
       return {
         ...state,
         todoList: action.payload.todos,
-        hasSearched: false,
+
         isTodoListLoading: false,
       };
 
@@ -60,6 +62,8 @@ export function todoReducer(state, action) {
         filterTerm: "",
         sortBy: "creationDate",
         sortDirection: "asc",
+        error: "",
+        filterError: "",
       };
     case TODO_ACTIONS.ADD_TODO_START:
       return {
@@ -72,6 +76,7 @@ export function todoReducer(state, action) {
         todoList: state.todoList.map((todo) =>
           todo.id === action.payload.tempId ? action.payload.todo : todo,
         ),
+        dataVersion: state.dataVersion + 1,
       };
     case TODO_ACTIONS.COMPLETE_TODO_START:
       return {
@@ -88,6 +93,7 @@ export function todoReducer(state, action) {
         todoList: state.todoList.map((todo) =>
           todo.id === action.payload.todo.id ? action.payload.todo : todo,
         ),
+        dataVersion: state.dataVersion + 1,
       };
     case TODO_ACTIONS.COMPLETE_TODO_ERROR:
       return {
@@ -119,11 +125,13 @@ export function todoReducer(state, action) {
       return {
         ...state,
         todoList: action.payload.todos,
+        dataVersion: state.dataVersion + 1,
       };
     case TODO_ACTIONS.UPDATE_TODO_ERROR:
       return {
         ...state,
         error: action.payload.message,
+        todoList: state.todoList,
       };
     case TODO_ACTIONS.CLEAR_ERROR:
       return {

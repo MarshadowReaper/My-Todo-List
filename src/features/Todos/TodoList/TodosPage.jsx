@@ -3,14 +3,15 @@ import SortBy from "../../../shared/SortBy";
 import TodoForm from "../TodoForm";
 import TodoList from "./TodoList";
 import FilterInput from "../../../shared/FilterInput";
-
+import { useAuth } from "../../../context/AuthContext.jsx";
 import { useReducer, useEffect } from "react";
 import {
   todoReducer,
   initialTodoState,
   TODO_ACTIONS,
 } from "../../../reducers/todoReducer";
-function TodosPage({ token }) {
+function TodosPage() {
+  const { token } = useAuth();
   const [state, dispatch] = useReducer(todoReducer, initialTodoState);
   const {
     todoList,
@@ -277,17 +278,7 @@ function TodosPage({ token }) {
 
           <button
             onClick={() => {
-              dispatch({
-                type: TODO_ACTIONS.SET_FILTER,
-                payload: { filterTerm: "" },
-              });
-              dispatch({
-                type: TODO_ACTIONS.SET_SORT,
-                payload: {
-                  sortBy: "creationDate",
-                  sortDirection: "desc",
-                },
-              });
+              dispatch({ type: TODO_ACTIONS.RESET_FILTERS });
             }}
           >
             Reset Filters
@@ -304,8 +295,7 @@ function TodosPage({ token }) {
           <button
             onClick={() =>
               dispatch({
-                type: TODO_ACTIONS.SET_FILTER,
-                payload: { filterTerm: "" },
+                type: TODO_ACTIONS.RESET_FILTERS,
               })
             }
           >
