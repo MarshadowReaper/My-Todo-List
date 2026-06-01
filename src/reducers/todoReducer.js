@@ -42,7 +42,7 @@ export function todoReducer(state, action) {
       return {
         ...state,
         todoList: action.payload.todos,
-        hasSearched: true,
+        hasSearched: false,
         isTodoListLoading: false,
       };
 
@@ -53,6 +53,13 @@ export function todoReducer(state, action) {
 
         filterError: action.payload.isFilterError ? action.payload.message : "",
         error: !action.payload.isFilterError ? action.payload.message : "",
+      };
+    case TODO_ACTIONS.RESET_FILTERS:
+      return {
+        ...state,
+        filterTerm: "",
+        sortBy: "creationDate",
+        sortDirection: "asc",
       };
     case TODO_ACTIONS.ADD_TODO_START:
       return {
@@ -80,6 +87,16 @@ export function todoReducer(state, action) {
         ...state,
         todoList: state.todoList.map((todo) =>
           todo.id === action.payload.todo.id ? action.payload.todo : todo,
+        ),
+      };
+    case TODO_ACTIONS.COMPLETE_TODO_ERROR:
+      return {
+        ...state,
+        error: action.payload.message,
+        todoList: state.todoList.map((todo) =>
+          todo.id === action.payload.todoId
+            ? { ...todo, isCompleted: false }
+            : todo,
         ),
       };
     case TODO_ACTIONS.ADD_TODO_ERROR:
