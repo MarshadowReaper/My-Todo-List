@@ -149,6 +149,7 @@ function TodosPage() {
         type: TODO_ACTIONS.ADD_TODO_ERROR,
         payload: {
           message: `Error adding todo: ${error.message}`,
+          tempId: tempTodo.id,
         },
       });
     }
@@ -190,16 +191,25 @@ function TodosPage() {
         type: TODO_ACTIONS.COMPLETE_TODO_ERROR,
         payload: {
           message: `Error completing todo: ${error.message}`,
+          todoId,
         },
       });
     }
   }
   const updateTodo = async (editedTodo) => {
+    const previousTodo = todoList.find((todo) => todo.id === editedTodo.id);
     const updatedTodos = todoList.map((todo) => {
       if (todo.id === editedTodo.id) {
         return { ...editedTodo };
       }
       return todo;
+    });
+    dispatch({
+      type: TODO_ACTIONS.UPDATE_TODO_START,
+      payload: {
+        previousTodo,
+        updatedTodo: editedTodo,
+      },
     });
 
     dispatch({
@@ -229,12 +239,8 @@ function TodosPage() {
       dispatch({
         type: TODO_ACTIONS.UPDATE_TODO_ERROR,
         payload: {
-          message:
-            debouncedFilterTerm ||
-            sortBy !== "creationDate" ||
-            sortDirection !== "desc"
-              ? `Error filtering/sorting todos: ${error.message}`
-              : `Error fetching todos: ${error.message}`,
+          message: `Error updating todo: ${error.message}`,
+          previousTodo,
         },
       });
     }

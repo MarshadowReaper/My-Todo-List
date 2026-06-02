@@ -109,6 +109,9 @@ export function todoReducer(state, action) {
       return {
         ...state,
         error: action.payload.message,
+        todoList: state.todoList.filter(
+          (todo) => todo.id !== action.payload.tempId,
+        ),
       };
     case TODO_ACTIONS.SET_FILTER:
       return {
@@ -121,6 +124,15 @@ export function todoReducer(state, action) {
         sortBy: action.payload.sortBy,
         sortDirection: action.payload.sortDirection,
       };
+    case TODO_ACTIONS.UPDATE_TODO_START:
+      return {
+        ...state,
+        todoList: state.todoList.map((todo) =>
+          todo.id === action.payload.updatedTodo.id
+            ? action.payload.updatedTodo
+            : todo,
+        ),
+      };
     case TODO_ACTIONS.UPDATE_TODO_SUCCESS:
       return {
         ...state,
@@ -131,7 +143,11 @@ export function todoReducer(state, action) {
       return {
         ...state,
         error: action.payload.message,
-        todoList: state.todoList,
+        todoList: state.todoList.map((todo) =>
+          todo.id === action.payload.previousTodo.id
+            ? action.payload.previousTodo
+            : todo,
+        ),
       };
     case TODO_ACTIONS.CLEAR_ERROR:
       return {
