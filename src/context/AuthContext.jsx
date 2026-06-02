@@ -49,6 +49,9 @@ export function AuthProvider({ children }) {
       const response = await fetch("/api/users/logoff", {
         method: "POST",
         credentials: "include",
+        headers: {
+          "X-CSRF-TOKEN": token,
+        },
       });
 
       if (!response.ok) {
@@ -59,16 +62,12 @@ export function AuthProvider({ children }) {
         };
       }
 
-      // clear auth state
       setEmail("");
       setToken("");
 
       return { success: true };
     } catch (err) {
-      return {
-        success: false,
-        error: err.message,
-      };
+      return { success: false, error: err.message };
     }
   };
 

@@ -11,7 +11,7 @@ function App() {
   return (
     <div>
       <Header />
-      {token ? <TodosPage token={token} /> : <Logon />}
+      {token ? <TodosPage /> : <Logon />}
     </div>
   );
 }
