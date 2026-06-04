@@ -1,22 +1,25 @@
 import TodoForm from "./TodoForm.jsx";
 import TodoList from "./TodoList.jsx";
 import { useState } from "react";
+<<<<<<< HEAD
 
 //This is holding the data
 //A small hello to the instructor this part was skipped by git
+=======
+const todos = [
+  { id: 1, title: "review resources" },
+  { id: 2, title: "take notes" },
+  { id: 3, title: "code out app" },
+  { id: 4, title: "take quizes" },
+];
+>>>>>>> 5ccf78cdd78450099556d658f091c881979cc613
 function App() {
-  const [todoList, setTodoList] = useState([]);
+  const [todoList, setTodoList] = useState(todos);
   //This is how to create a state
-  function addTodo(todoTitle) {
-    const newTodo = { id: Date.now(), title: todoTitle };
-
-    setTodoList((previous) => [newTodo, ...previous]);
-  }
-
   return (
     <div>
       <h1> My Todos </h1>
-      <TodoForm onAddTodo={addTodo} />
+      <TodoForm />
       <TodoList todoList={todoList} />
     </div>
   );
