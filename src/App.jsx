@@ -1,40 +1,25 @@
 import TodoForm from "./TodoForm.jsx";
 import TodoList from "./TodoList.jsx";
 import { useState } from "react";
-const todos = [
-  { id: 1, title: "review resources" },
-  { id: 2, title: "take notes" },
-  { id: 3, title: "code out app" },
-  { id: 4, title: "take quizes" },
-];
+
+//This is holding the data
+//A small hello to the instructor this part was skipped by git
 function App() {
-  const [todoList, setTodoList] = useState(todos);
+  const [todoList, setTodoList] = useState([]);
   //This is how to create a state
   function addTodo(todoTitle) {
-    const toDo = { id: Date.now(), title: todoTitle, isCompleted: false };
+    const newTodo = { id: Date.now(), title: todoTitle };
 
-    setTodoList((previous) => [toDo, ...previous]);
-  }
-  function completeTodo(id) {
-    const updatedList = todoList.map((todo) => {
-      if (todo.id === id) {
-        return { ...todo, isCompleted: true };
-      } else {
-        return todo;
-      }
-    });
-    setTodoList(updatedList);
+    setTodoList((previous) => [newTodo, ...previous]);
   }
 
   return (
     <div>
       <h1> My Todos </h1>
       <TodoForm onAddTodo={addTodo} />
-      <TodoList todoList={todoList} onCompleteTodo={completeTodo} />
+      <TodoList todoList={todoList} />
     </div>
   );
 }
 //<TodoList todoList={todoList} /> This is managing and passing data down to children
 export default App;
-
-//Programmer's note: I had a LOT of troubleshooting to do with this one so figured to help understand the lesson better I should label what role the codes are playing
