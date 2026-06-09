@@ -12,7 +12,7 @@ function TodoList({ todoList, onCompleteTodo, onUpdateTodo }) {
         <p>Add todo above to get started</p>
       ) : (
         <ul>
-          {filteredTodoList.map((todo) => (
+          {todoList.map((todo) => (
             <TodoListItem
               todo={todo}
               key={todo.id}
@@ -27,3 +27,4 @@ function TodoList({ todoList, onCompleteTodo, onUpdateTodo }) {
 }
 
 export default TodoList;
+//testing
