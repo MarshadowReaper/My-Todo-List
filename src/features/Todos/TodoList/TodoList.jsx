@@ -7,8 +7,7 @@ function TodoList({ todoList, onCompleteTodo, onUpdateTodo }) {
   );
   const clear = filteredTodoList.length === 0;
 
-function TodoList({ todoList, onCompleteTodo }) {
-  const clear = todoList.length === 0;
+
 
 
   return (
@@ -30,6 +29,6 @@ function TodoList({ todoList, onCompleteTodo }) {
     </>
   );
 }
-}
+
 export default TodoList;
 

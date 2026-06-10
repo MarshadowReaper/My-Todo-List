@@ -1,4 +1,4 @@
-function Header() {
+function Header({ token, onSetToken, onSetEmail}) {
   return (
     <header className="site-header">
       <h1>Todo List</h1>
