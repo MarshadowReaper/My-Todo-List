@@ -1,30 +1,29 @@
 import TodoForm from "./TodoForm.jsx";
-import TodoList from "./TodoList.jsx";
 import { useState } from "react";
+import Header from "./shared/Header.jsx";
+import Logon from "./features/Logon.jsx";
+import TodosPage from "./features/Todos/TodosPage.jsx";
 
-<<<<<<< HEAD
 function App() {
-  const [todoList, setTodoList] = useState([]);
-  //This is matching assignment 5's requirements
-
-=======
-//This is holding the data
-//A small hello to the instructor this part was skipped by git
-function App() {
-  const [todoList, setTodoList] = useState([]);
-  //This is how to create a state
->>>>>>> main
-  function addTodo(todoTitle) {
-    const newTodo = { id: Date.now(), title: todoTitle };
-
-    setTodoList((previous) => [newTodo, ...previous]);
-  }
+  const [email, setEmail] = useState("");
+  const [token, setToken] = useState("");
 
   return (
     <div>
-      <h1> My Todos </h1>
-      <TodoForm onAddTodo={addTodo} />
-      <TodoList todoList={todoList} />
+      <Header
+        token={token}
+        onSetEmail={setEmail}
+        onSetToken={setToken}
+      />
+
+      {token ? (
+        <TodosPage token={token} />
+      ) : (
+        <Logon
+          onSetEmail={setEmail}
+          onSetToken={setToken}
+        />
+      )}
     </div>
   );
 }
