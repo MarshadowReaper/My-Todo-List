@@ -1,11 +1,13 @@
-import { isValidTodoTitle } from "../../utils/todoValidation";
-import TextInputWithLabel from "../../shared/TextInputWithLabel";
+import { isValidTodoTitle } from "../utils/todoValidation";
+import TextInputWithLabel from "../shared/TextInputWithLabel";
 import { useRef } from "react";
 import { useState } from "react";
+
+
+
 function TodoForm({ onAddTodo }) {
   const inputRef = useRef();
-  const [workingTodoTitle, setworkingTodoTitle] = useState("");
-
+  const [workingTodoTitle, setworkingTodoTitle] = useState('');
   const handleChange = (event) => {
     setworkingTodoTitle(event.target.value);
   };
@@ -19,6 +21,7 @@ function TodoForm({ onAddTodo }) {
       inputRef.current.focus();
     }
   };
+
   return (
     <form onSubmit={handleAddTodo}>
       <TextInputWithLabel
