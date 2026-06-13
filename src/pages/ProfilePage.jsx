@@ -75,7 +75,7 @@ export default function ProfilePage() {
   return (
     <div>
       
-      <h1>User: {name}</h1>
+      <h1>User: {email}</h1>
 
       <p>
         Status: {token ? "Authenticated" : "Not Authenticated"}
