@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 export default function ProfilePage() {
-  const { name, token } = useAuth();
+  const { email, token } = useAuth();
 
  
   const [todoStats, setTodoStats] = useState({
@@ -62,7 +62,7 @@ export default function ProfilePage() {
           active,
         });
       } catch (err) {
-        // STEP 8: error handling
+        
         setError(err.message);
       } finally {
         setLoading(false);
@@ -93,7 +93,7 @@ export default function ProfilePage() {
           <p>Completed: {todoStats.completed}</p>
           <p>Active: {todoStats.active}</p>
 
-          {/* STEP 10: completion percentage */}
+         
           {todoStats.total > 0 && (
             <p>
               Completion:{" "}
