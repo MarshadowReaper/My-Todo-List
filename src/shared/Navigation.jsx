@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-import { useAuth } from "../context/AuthContext.jsx";
+import { useAuth } from "../contexts/AuthContext.jsx";
 function Navigation() {
   const { isAuthenticated } = useAuth();
     const navLinkStyle = ({ isActive }) => ({

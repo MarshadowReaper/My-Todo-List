@@ -3,7 +3,7 @@ import SortBy from "../shared/SortBy.jsx";
 import TodoForm from "../features/Todos/TodoForm.jsx";
 import TodoList from "../features/Todos/TodoList/TodoList.jsx";
 import FilterInput from "../shared/FilterInput.jsx";
-import { useAuth } from "../context/AuthContext.jsx";
+import { useAuth } from "../contexts/AuthContext.jsx";
 import { useReducer, useEffect } from "react";
 import {
   todoReducer,
