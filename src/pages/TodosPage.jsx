@@ -65,13 +65,12 @@ function TodosPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        console.log(response.status);
-        console.log(data);
+        
         throw new Error("Failed to fetch todos");
       }
 
       if (data.tasks.length === 0) {
-        console.log("FETCH DATA:", data);
+        
         dispatch({
           type: TODO_ACTIONS.FETCH_ERROR,
           payload: {
