@@ -1,11 +1,9 @@
 import TodoListItem from "./TodoListItem.jsx";
 import { useMemo } from "react";
-function TodoList({ todoList, onCompleteTodo, onUpdateTodo, dataVersion }) {
+function TodoList({ todoList, statusFilter = "all", onCompleteTodo, onUpdateTodo, dataVersion }) {
   const filteredTodoList = useMemo(() => {
-    const activeTodos = todoList.filter((todo) => !todo.isCompleted);
-    const isNoTodosAtAll = todoList.length === 0;
-    const isNoActiveTodos = todoList.length > 0 && activeTodos.length === 0;
-    let filteredTodos;
+   
+    let filteredTodos = todoList;
 
 switch (statusFilter) {
   case "completed":
@@ -24,11 +22,8 @@ switch (statusFilter) {
   version: dataVersion,
   todos: filteredTodos,
 }
-    return {
-      version: dataVersion,
-      todos: activeTodos,
-    };
-  }, [todoList, dataVersion]);
+
+  }, [todoList, statusFilter, dataVersion]);
   const clear = filteredTodoList.todos.length === 0;
 const getEmptyMessage = () => {
   switch (statusFilter) {
