@@ -351,7 +351,6 @@ function TodosPage() {
           onUpdateTodo={updateTodo}
           dataVersion={dataVersion}
             statusFilter={statusFilter}
-            statusFilter = "active"
         />
       )}
     </>
