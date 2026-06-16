@@ -1,41 +1,87 @@
-Hello there viewer! This is a Todo app built with React. This little app is designed to help you learn the basics of React and understand how to prepare, build, and work through the material as you go.
+About This Project
+
+Hello there! This is my Todo List application built with React and Vite as part of my Code the Dream journey. The goal of this project was to learn how React works while building something useful that lets users create, edit, complete, sort, and filter their daily tasks.
+
+Along the way I learned how websites can be built with separate pages using React Router and how different components and functions work together to automatically update the page without needing a refresh. I also learned how web applications can fetch data from APIs and display that data as the page renders.
+
+Admittedly, I still have a lot to learn and a lot to understand, so I'm not quite where I want to be yet. However, every project teaches me something new, and my goal is to continue improving until I'm comfortable moving on to more advanced React development.
+
+Features
+Add new todos
+Edit existing todos
+Mark tasks as completed
+Filter between All, Active, and Completed tasks
+Search for specific todos
+Sort todos in different ways
+Protected pages that require login
+Responsive layout that works on different screen sizes
+Technologies Used
+React
+Vite
+JavaScript
+React Router
+Context API
+useReducer
+useEffect
+useMemo
+CSS
+Fetch API
+Screenshots
+
+Desktop View
+![alt text](image-1.png)
+Mobile View
+![alt text](image.png)
 
 Installation
 
-Before getting started, make sure you have Node.js installed. Without it, your terminal won’t recognize the commands used to run the project.
+Clone the repository:
 
-If you are using this project from GitHub, first clone the repository:
+gh repo clone MarshadowReaper/My-Todo-List
+cd Code The Dream React/My-Todo-List
 
-git clone your-repository-url
-cd your-project-name
-
-If you are creating a new project, run:
-
-npx create-vite@latest
-
-Follow the prompts:
-
-Name your project
-Select React
-Select JavaScript
-
-Then move into your project folder:
-
-cd your-project-name
-
-Install the required dependencies:
+Install dependencies:
 
 npm install
-Run the Development Server
 
-To start the app, run:
+Start the development server:
+
+npm run dev
+Available Scripts
+
+Start the project:
 
 npm run dev
 
-After running this command, your terminal will display a local URL (usually something like http://localhost:5173/). Open that link in your browser to view the app.
+Build the project:
 
-<!-- A note to the mentors this is my original README I was advised to structure the README differently so had some help, (Now first things first, you need to learn how to install tools such as this lovely little template and to keep you from running all over the web trying to figure out what do you need like I have, I will tell you.
+npm run build
 
-First you will need to create a repo to clone in github to put in  have access to Node.js before getting started on installing a template. Without it, your terminal won't recognize anything of what you'll do next.  Second after installing the Node.js you will need to open up the terminal and type "npx create-vite@latest -template react ." It will ask you to name the template, next select "React" then select "Javascript" and lastly it will ask to install npm, pick "yes" and then you have successfully installed the template run npm install and afterwards run npm run dev and make sure the port number matches the last 4 numbers of http://localhost: if not it will refuse to connect
+Preview the production build:
 
-Now then lastly. You will need to do some cleaning from App.css, App.jsx, and index.css, however, in App.jsx you should leave only the import for App.css , the function App, return function and the export default app. From there you are all set to start developing software with react) -->
+npm run preview
+Design Decisions
+
+I wanted the app to feel simple and organized, so I separated the area for creating todos from the area that displays them. My goal was to make it easy for users to focus on adding tasks while still keeping their list easy to read and manage.
+
+I also used React Router for navigation, Context API for authentication, and useReducer to keep my todo state organized as the project became more complex.
+
+Future Improvements
+
+In the near future, I would like to add:
+
+Delete completed todos
+Drag-and-drop task ordering
+Categories and priorities
+Dark mode
+Due dates and reminders
+User customization options
+License
+
+This project is available under the MIT License.
+
+Contact
+
+GitHub: https://github.com/MarshadowReaper
+
+Portfolio: http://127.0.0.1:5500/Boilerplate.html

@@ -10,8 +10,8 @@ import {
   initialTodoState,
   TODO_ACTIONS,
 } from "../reducers/todoReducer.js";
-import { useSearchParams } from 'react-router';
-import StatusFilter from '../shared/StatusFilter';
+import { useSearchParams } from "react-router";
+import StatusFilter from "../shared/StatusFilter";
 
 function TodosPage() {
   const { token } = useAuth();
@@ -37,77 +37,7 @@ function TodosPage() {
   };
 
   const debouncedFilterTerm = useDebounce(filterTerm, 300);
-  const fetchTodos = async () => {
-    dispatch({ type: TODO_ACTIONS.FETCH_START });
 
-    try {
-      const paramsObject = {
-        sortBy,
-        sortDirection,
-      };
-
-      if (debouncedFilterTerm) {
-        paramsObject.find = debouncedFilterTerm;
-      }
-
-      const params = new URLSearchParams(paramsObject);
-
-      const response = await fetch(`/api/tasks?${params}`, {
-        headers: {
-          "X-CSRF-TOKEN": token,
-        },
-        credentials: "include",
-      });
-
-      if (response.status === 401) {
-        throw new Error("unauthorized");
-      }
-      const data = await response.json();
-
-      if (!response.ok) {
-        
-        throw new Error("Failed to fetch todos");
-      }
-
-      if (data.tasks.length === 0) {
-        
-        dispatch({
-          type: TODO_ACTIONS.FETCH_ERROR,
-          payload: {
-            message: "No matching todos found.",
-            isFilterError: true,
-          },
-        });
-
-        return;
-      }
-
-      dispatch({
-        type: TODO_ACTIONS.FETCH_SUCCESS,
-        payload: {
-          todos: data.tasks,
-        },
-      });
-    } catch (error) {
-      dispatch({
-        type: TODO_ACTIONS.FETCH_ERROR,
-        payload: {
-          message:
-            debouncedFilterTerm ||
-            sortBy !== "creationDate" ||
-            sortDirection !== "desc"
-              ? `Error filtering/sorting todos: ${error.message}`
-              : `Error fetching todos: ${error.message}`,
-
-          isFilterError:
-            debouncedFilterTerm ||
-            sortBy !== "creationDate" ||
-            sortDirection !== "desc",
-        },
-      });
-    } finally {
-    }
-  };
   async function addTodo(todoTitle) {
     const tempTodo = {
       id: Date.now(),
@@ -134,7 +64,6 @@ function TodosPage() {
           isCompleted: false,
         }),
       });
-
       if (!response.ok) {
         throw new Error("Failed to create todo");
       }
@@ -154,6 +83,7 @@ function TodosPage() {
         payload: {
           message: `Error adding todo: ${error.message}`,
           tempId: tempTodo.id,
+          creationDate: new Date(),
         },
       });
     }
@@ -252,7 +182,76 @@ function TodosPage() {
 
   useEffect(() => {
     if (!token) return;
+    const fetchTodos = async () => {
+      dispatch({ type: TODO_ACTIONS.FETCH_START });
+      console.log("SORTING:", sortBy, sortDirection);
+      try {
+        const paramsObject = {
+          sortBy,
+          sortDirection,
+        };
 
+        if (debouncedFilterTerm) {
+          paramsObject.find = debouncedFilterTerm;
+        }
+
+        const params = new URLSearchParams(paramsObject);
+
+        const response = await fetch(`/api/tasks?${params}`, {
+          headers: {
+            "X-CSRF-TOKEN": token,
+          },
+          credentials: "include",
+        });
+
+        if (response.status === 401) {
+          throw new Error("unauthorized");
+        }
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch todos");
+        }
+
+        if (data.tasks.length === 0) {
+          dispatch({
+            type: TODO_ACTIONS.FETCH_ERROR,
+            payload: {
+              message: "No matching todos found.",
+              isFilterError: true,
+            },
+          });
+
+          return;
+        }
+
+        dispatch({
+          type: TODO_ACTIONS.FETCH_SUCCESS,
+          payload: {
+            todos: data.tasks,
+          },
+        });
+      } catch (error) {
+        dispatch({
+          type: TODO_ACTIONS.FETCH_ERROR,
+          payload: {
+            message:
+              debouncedFilterTerm ||
+              sortBy !== "creationDate" ||
+              sortDirection !== "desc"
+                ? `Error filtering/sorting todos: ${error.message}`
+                : `Error fetching todos: ${error.message}`,
+
+            isFilterError:
+              debouncedFilterTerm ||
+              sortBy !== "creationDate" ||
+              sortDirection !== "desc",
+          },
+        });
+      } finally {
+        /*empty*/
+      }
+    };
     fetchTodos();
   }, [token, sortBy, sortDirection, debouncedFilterTerm]);
   const hasSearch = debouncedFilterTerm.trim().length > 0;
@@ -314,44 +313,53 @@ function TodosPage() {
         </div>
       )}
       {isTodoListLoading && <p>Loading todos...</p>}
-      <SortBy
-        sortBy={sortBy}
-        sortDirection={sortDirection}
-        onSortByChange={(newSortBy) =>
-          dispatch({
-            type: TODO_ACTIONS.SET_SORT,
-            payload: {
-              sortBy: newSortBy,
-              sortDirection,
-            },
-          })
-        }
-        onSortDirectionChange={(newSortDirection) =>
-          dispatch({
-            type: TODO_ACTIONS.SET_SORT,
-            payload: {
-              sortBy,
-              sortDirection: newSortDirection,
-            },
-          })
-        }
-      />
-      <StatusFilter />
-      <FilterInput
-        filterTerm={filterTerm}
-        onFilterChange={handleFilterChange}
-      />
-      
-      <TodoForm onAddTodo={addTodo} />
-      {showTodos && (
-        <TodoList
-          todoList={todoList}
-          onCompleteTodo={completeTodo}
-          onUpdateTodo={updateTodo}
-          dataVersion={dataVersion}
-            statusFilter={statusFilter}
-        />
-      )}
+      <div className="main-content">
+        <div className="todo-form-panel">
+          <SortBy
+            sortBy={sortBy}
+            sortDirection={sortDirection}
+            onSortByChange={(newSortBy) =>
+              dispatch({
+                type: TODO_ACTIONS.SET_SORT,
+                payload: {
+                  sortBy: newSortBy,
+                  sortDirection,
+                },
+              })
+            }
+            onSortDirectionChange={(newSortDirection) =>
+              dispatch({
+                type: TODO_ACTIONS.SET_SORT,
+                payload: {
+                  sortBy,
+                  sortDirection: newSortDirection,
+                },
+              })
+            }
+          />
+
+          <StatusFilter />
+
+          <FilterInput
+            filterTerm={filterTerm}
+            onFilterChange={handleFilterChange}
+          />
+
+          <TodoForm onAddTodo={addTodo} />
+        </div>
+
+        <div className="todo-list-panel">
+          {showTodos && (
+            <TodoList
+              todoList={todoList}
+              onCompleteTodo={completeTodo}
+              onUpdateTodo={updateTodo}
+              dataVersion={dataVersion}
+              statusFilter={statusFilter}
+            />
+          )}
+        </div>
+      </div>
     </>
   );
 }

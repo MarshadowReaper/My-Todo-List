@@ -43,7 +43,7 @@ const getEmptyMessage = () => {
       {clear ? (
         <p>{getEmptyMessage()}</p>
       ) : (
-        <ul>
+        <ul className="todo-list">
           {filteredTodoList.todos.length === 0 && (
             <p>No matching todos found.</p>
           )}

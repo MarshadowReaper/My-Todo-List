@@ -90,8 +90,8 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.COMPLETE_TODO_SUCCESS:
       return {
         ...state,
-        todoList: state.todoList.map((todo) =>
-          todo.id === action.payload.todo.id ? action.payload.todo : todo,
+        todoList: state.todoList.filter(
+          (todo) => todo.id !== action.payload.todo.id,
         ),
         dataVersion: state.dataVersion + 1,
       };

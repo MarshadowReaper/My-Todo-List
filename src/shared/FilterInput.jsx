@@ -10,6 +10,7 @@ function FilterInput({ filterTerm, onFilterChange }) {
         onChange={(e) => onFilterChange(e.target.value)}
         placeholder="Search by title..."
       />
+      {filterTerm && <button onClick={() => onFilterChange("")}>Clear</button>}
     </div>
   );
 }

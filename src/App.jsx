@@ -11,14 +11,14 @@ import Header from './shared/Header';
 
 function App() {
   return (
-    <>
+    <div className="app">
       <Header />
       <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route path='/about' element={<AboutPage />} />
-        <Route path='/login' element={<LoginPage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route
-          path='/todos'
+          path="/todos"
           element={
             <RequireAuth>
               <TodosPage />
@@ -26,19 +26,18 @@ function App() {
           }
         />
         <Route
-          path='/profile'
+          path="/profile"
           element={
             <RequireAuth>
               <ProfilePage />
             </RequireAuth>
           }
         />
-        <Route path='*' element={<NotFoundPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
-    </>
+    </div>
   );
 }
-
 export default App;
 
 //Programmer's note: I had a LOT of troubleshooting to do with this one so figured to help understand the lesson better I should label what role the codes are playing

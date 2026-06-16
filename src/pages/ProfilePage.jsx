@@ -3,7 +3,6 @@ import { useAuth } from "../contexts/AuthContext";
 export default function ProfilePage() {
   const { email, token } = useAuth();
 
- 
   const [todoStats, setTodoStats] = useState({
     total: 0,
     completed: 0,
@@ -13,17 +12,14 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  
   useEffect(() => {
     async function fetchTodoStats() {
       if (!token) return;
 
       try {
-        
         setLoading(true);
         setError("");
 
-       
         const response = await fetch("/api/tasks", {
           method: "GET",
           headers: {
@@ -32,7 +28,6 @@ export default function ProfilePage() {
           credentials: "include",
         });
 
-        
         if (response.status === 401) {
           throw new Error("Unauthorized");
         }
@@ -41,18 +36,13 @@ export default function ProfilePage() {
           throw new Error("Failed to fetch todos");
         }
 
-       
         const data = await response.json();
 
-      
         const todos = data.tasks || data;
 
-        
         const total = todos.length;
 
-        const completed = todos.filter(
-          (todo) => todo.isCompleted
-        ).length;
+        const completed = todos.filter((todo) => todo.isCompleted).length;
 
         const active = total - completed;
 
@@ -62,7 +52,6 @@ export default function ProfilePage() {
           active,
         });
       } catch (err) {
-        
         setError(err.message);
       } finally {
         setLoading(false);
@@ -73,13 +62,10 @@ export default function ProfilePage() {
   }, [token]);
 
   return (
-    <div>
-      
+    <div className="page">
       <h1>User: {email}</h1>
 
-      <p>
-        Status: {token ? "Authenticated" : "Not Authenticated"}
-      </p>
+      <p>Status: {token ? "Authenticated" : "Not Authenticated"}</p>
 
       {loading && <p>Loading stats...</p>}
 
@@ -87,22 +73,20 @@ export default function ProfilePage() {
 
       {!loading && !error && (
         <>
-          <h3>Todo Stats</h3>
+          <div className="Stats">
+            <h3>Todo Stats</h3>
 
-          <p>Total Todos: {todoStats.total}</p>
-          <p>Completed: {todoStats.completed}</p>
-          <p>Active: {todoStats.active}</p>
+            <p>Total Todos: {todoStats.total}</p>
+            <p>Completed: {todoStats.completed}</p>
+            <p>Active: {todoStats.active}</p>
 
-         
-          {todoStats.total > 0 && (
-            <p>
-              Completion:{" "}
-              {Math.round(
-                (todoStats.completed / todoStats.total) * 100
-              )}
-              %
-            </p>
-          )}
+            {todoStats.total > 0 && (
+              <p>
+                Completion:{" "}
+                {Math.round((todoStats.completed / todoStats.total) * 100)}%
+              </p>
+            )}
+          </div>
         </>
       )}
     </div>
