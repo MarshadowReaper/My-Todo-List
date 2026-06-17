@@ -1,7 +1,10 @@
 import TodoListItem from "./TodoListItem.jsx";
 
-function TodoList({ todoList, onCompleteTodo }) {
-  const clear = todoList.length === 0;
+function TodoList({ todoList, onCompleteTodo, onUpdateTodo }) {
+  const filteredTodoList = todoList.filter(
+    (todo) => todo.isCompleted === false,
+  );
+  const clear = filteredTodoList.length === 0;
 
   return (
     <>
@@ -14,6 +17,7 @@ function TodoList({ todoList, onCompleteTodo }) {
               todo={todo}
               key={todo.id}
               onCompleteTodo={onCompleteTodo}
+              onUpdateTodo={onUpdateTodo}
             />
           ))}
         </ul>
