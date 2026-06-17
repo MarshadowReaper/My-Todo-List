@@ -1,0 +1,19 @@
+.loginBox {
+  max-width: 450px;
+
+  margin: 3rem auto;
+
+  padding: 2rem;
+
+  background: var(--secondary);
+
+  border-radius: 12px;
+}
+@media (max-width: 768px) {
+  .loginBox {
+    max-width: 100%;
+    margin: 1rem;
+    padding: 1.25rem;
+    border-radius: 12px;
+  }
+}

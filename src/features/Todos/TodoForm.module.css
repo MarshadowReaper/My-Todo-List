@@ -1,0 +1,18 @@
+.mainContent {
+  display: flex;
+  gap: 2rem;
+}
+
+.formPanel {
+  width: 320px;
+  background: var(--secondary);
+  padding: 1.5rem;
+  border-radius: 12px;
+}
+
+.listPanel {
+  flex: 1;
+  background: var(--secondary);
+  padding: 1.5rem;
+  border-radius: 12px;
+}

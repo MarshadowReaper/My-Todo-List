@@ -1,3 +1,4 @@
+import styles from "./LoginPage.module.css";
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
@@ -32,7 +33,7 @@ function LoginPage() {
   }
   return (
     <>
-      <div className="page">
+      <div className={styles.loginBox}>
         {authError && <div role="alert">{authError}</div>}
 
         <form onSubmit={handleSubmit}>

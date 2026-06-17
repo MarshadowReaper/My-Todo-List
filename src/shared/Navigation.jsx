@@ -1,3 +1,4 @@
+import styles from "./Navigation.module.css";
 import { NavLink } from "react-router";
 import { useAuth } from "../contexts/AuthContext.jsx";
 function Navigation() {
@@ -7,7 +8,7 @@ function Navigation() {
     textDecoration: isActive ? "underline" : "none",
   });
   return (
-    <nav className="">
+    <nav className={styles.navigation}>
       <ul
         style={{
           listStyle: "none",

@@ -1,3 +1,5 @@
+import DOMPurify from "dompurify";
+import styles from "./TodosPage.module.css";
 import useDebounce from "../utils/useDebounce.js";
 import SortBy from "../shared/SortBy.jsx";
 import TodoForm from "../features/Todos/TodoForm.jsx";
@@ -39,9 +41,13 @@ function TodosPage() {
   const debouncedFilterTerm = useDebounce(filterTerm, 300);
 
   async function addTodo(todoTitle) {
+    const cleanTitle = DOMPurify.sanitize(todoTitle.trim(), {
+      ALLOWED_TAGS: [],
+      ALLOWED_ATTR: [],
+    });
     const tempTodo = {
       id: Date.now(),
-      title: todoTitle,
+      title: cleanTitle,
       isCompleted: false,
     };
 
@@ -313,8 +319,8 @@ function TodosPage() {
         </div>
       )}
       {isTodoListLoading && <p>Loading todos...</p>}
-      <div className="main-content">
-        <div className="todo-form-panel">
+      <div className={styles.mainContent}>
+        <div className={styles.formPanel}>
           <SortBy
             sortBy={sortBy}
             sortDirection={sortDirection}
@@ -348,7 +354,7 @@ function TodosPage() {
           <TodoForm onAddTodo={addTodo} />
         </div>
 
-        <div className="todo-list-panel">
+        <div className={styles.linePanel}>
           {showTodos && (
             <TodoList
               todoList={todoList}

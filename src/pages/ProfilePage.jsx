@@ -1,3 +1,4 @@
+import styles from "./ProfilePage.module.css";
 import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 export default function ProfilePage() {
@@ -62,7 +63,7 @@ export default function ProfilePage() {
   }, [token]);
 
   return (
-    <div className="page">
+    <div className={styles.profile}>
       <h1>User: {email}</h1>
 
       <p>Status: {token ? "Authenticated" : "Not Authenticated"}</p>

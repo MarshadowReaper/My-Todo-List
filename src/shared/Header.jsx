@@ -1,3 +1,4 @@
+import styles from "./Header.module.css";
 import { useAuth } from "../contexts/AuthContext.jsx";
 import Logoff from "../features/Logoff.jsx";
 import Navigation from "./Navigation.jsx";
@@ -6,9 +7,9 @@ function Header() {
   const { isAuthenticated } = useAuth();
 
   return (
-    <header className="site-header">
+    <header className={styles.siteHeader}>
       <h1>Todo List</h1>
-       <Navigation />
+      <Navigation />
       {isAuthenticated && <Logoff />}
     </header>
   );

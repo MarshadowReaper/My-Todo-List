@@ -1,6 +1,7 @@
+import styles from "./AboutPage.module.css";
 function AboutPage() {
   return (
-    <section className="About">
+    <section className={styles.about}>
       <h2>About</h2>
       <p>
         This Todo List application was created as part of my Code the Dream

@@ -1,0 +1,23 @@
+.navigation {
+  display: flex;
+  gap: 1rem;
+}
+
+.link {
+  text-decoration: none;
+  color: #444;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.link:hover {
+  color: var(--primary);
+}
+
+@media (max-width: 768px) {
+  .navigation {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+}

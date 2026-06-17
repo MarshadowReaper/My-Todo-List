@@ -1,0 +1,36 @@
+.mainContent {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.formPanel {
+  width: 320px;
+
+  background: var(--secondary);
+  padding: 1.5rem;
+
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.listPanel {
+  flex: 1;
+
+  background: var(--secondary);
+  padding: 1.5rem;
+
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 768px) {
+  .mainContent {
+    flex-direction: column;
+  }
+
+  .formPanel,
+  .listPanel {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}

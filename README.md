@@ -43,6 +43,7 @@ cd Code The Dream React/My-Todo-List
 Install dependencies:
 
 npm install
+npm install dompurify
 
 Start the development server:
 
