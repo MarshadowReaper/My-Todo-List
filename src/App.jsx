@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Header from "./shared/Header.jsx";
 import Logon from "./features/Logon.jsx";
@@ -11,6 +10,7 @@ function App() {
   return (
     <div>
       <Header
+        email={email}
         token={token}
         onSetEmail={setEmail}
         onSetToken={setToken}
@@ -19,10 +19,7 @@ function App() {
       {token ? (
         <TodosPage token={token} />
       ) : (
-        <Logon
-          onSetEmail={setEmail}
-          onSetToken={setToken}
-        />
+        <Logon onSetEmail={setEmail} onSetToken={setToken} />
       )}
     </div>
   );
