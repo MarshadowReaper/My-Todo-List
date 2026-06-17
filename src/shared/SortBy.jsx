@@ -6,7 +6,6 @@ function SortBy({
 }) {
   return (
     <div>
-      {/* Sort By */}
       <label htmlFor="sortBy">Sort by:</label>
       <select
         id="sortBy"
@@ -17,7 +16,6 @@ function SortBy({
         <option value="title">Title</option>
       </select>
 
-      {/* Sort Direction */}
       <label htmlFor="sortDirection">Order:</label>
       <select
         id="sortDirection"

@@ -196,6 +196,7 @@ function TodosPage() {
           sortBy,
           sortDirection,
         };
+        console.log(sortBy);
 
         if (debouncedFilterTerm) {
           paramsObject.find = debouncedFilterTerm;
