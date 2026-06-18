@@ -23,7 +23,7 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
   return (
     <li>
       {isEditing ? (
-        <>
+        <form onSubmit={handleUpdate}>
           <TextInputWithLabel
             elementId={`todo-${todo.id}`}
             labelText="Todo"
@@ -33,21 +33,19 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
           <button type="button" onClick={handleCancel}>
             Cancel
           </button>
-          <button
-            type="submit"
-            onClick={handleUpdate}
-            disabled={!isValidTodoTitle(workingTitle)}
-          >
+          <button type="submit" disabled={!isValidTodoTitle(workingTitle)}>
             Update
           </button>
-        </>
+        </form>
       ) : (
         <>
           <input
             type="checkbox"
             id={`checkbox${todo.id}`}
             checked={todo.isCompleted}
-            onChange={() => onCompleteTodo(todo.id)}
+            onChange={() => {
+              onCompleteTodo(todo.id);
+            }}
           />
 
           <span
@@ -55,6 +53,7 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
               setWorkingTitle(todo.title);
               setIsEditing(true);
             }}
+            style={{ cursor: "pointer" }}
           >
             {todo.title}
           </span>
