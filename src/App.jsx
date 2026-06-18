@@ -5,6 +5,7 @@ import Header from "./shared/Header.jsx";
 import Logon from "./features/Logon.jsx";
 import TodosPage from "./features/Todos/TodosPage.jsx";
 
+//This is holding the data
 function App() {
   const [todoList, setTodoList] = useState([]);
   //This is how to create a state
@@ -42,5 +43,5 @@ function App() {
     </div>
   );
 }
-//<TodoList todoList={todoList} /> This is managing and passing data down to children
+
 export default App;

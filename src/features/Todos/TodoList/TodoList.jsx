@@ -3,7 +3,8 @@ import { useMemo } from "react";
 function TodoList({ todoList, onCompleteTodo, onUpdateTodo, dataVersion }) {
   const filteredTodoList = useMemo(() => {
     const activeTodos = todoList.filter((todo) => !todo.isCompleted);
-
+    const isNoTodosAtAll = todoList.length === 0;
+    const isNoActiveTodos = todoList.length > 0 && activeTodos.length === 0;
     return {
       version: dataVersion,
       todos: activeTodos,
@@ -17,6 +18,9 @@ function TodoList({ todoList, onCompleteTodo, onUpdateTodo, dataVersion }) {
         <p>Add todo above to get started</p>
       ) : (
         <ul>
+          {filteredTodoList.todos.length === 0 && (
+            <p>No matching todos found.</p>
+          )}
           {filteredTodoList.todos.map((todo) => (
             <TodoListItem
               todo={todo}
