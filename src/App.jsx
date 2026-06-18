@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import './App.css';
 import { Routes, Route } from 'react-router';
 import HomePage from './pages/HomePage';
@@ -36,9 +37,44 @@ function App() {
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </>
+=======
+import TodoForm from "./features/TodoForm.jsx";
+import TodoList from "./features/TodoList/TodoList.jsx";
+import { useState } from "react";
+
+//This is holding the data
+//A small hello to the instructor this part was skipped by git
+function App() {
+  const [todoList, setTodoList] = useState([]);
+  //This is how to create a state
+  function addTodo(todoTitle) {
+    const newTodo = { id: Date.now(), title: todoTitle };
+
+    setTodoList((previous) => [newTodo, ...previous]);
+  }
+  const updateTodo = (editedTodo) => {
+    const updatedTodos = todoList.map((todo) => {
+      if (todo.id === editedTodo.id) {
+        return { ...editedTodo };
+      }
+      return todo;
+    });
+
+    setTodoList(updatedTodos);
+  };
+
+  return (
+    <div>
+      <h1> My Todos </h1>
+      <TodoForm onAddTodo={addTodo} />
+      <TodoList
+        todoList={todoList}
+        onCompleteTodo={completeTodo}
+        onUpdateTodo={updateTodo}
+      />
+    </div>
+>>>>>>> origin/main
   );
 }
 
 export default App;
-
-//Programmer's note: I had a LOT of troubleshooting to do with this one so figured to help understand the lesson better I should label what role the codes are playing
