@@ -10,18 +10,25 @@ function TodoForm({ onAddTodo }) {
     setworkingTodoTitle(event.target.value);
   };
 
+  const handleChange = (event) => {
+    setworkingTodoTitle(event.target.value);
+  };
+
   const handleAddTodo = (event) => {
     event.preventDefault();
 
-    if (isValidTodoTitle(workingTodoTitle)) {
-      onAddTodo(workingTodoTitle);
-      setworkingTodoTitle("");
+    const todoTitle = event.target.todoTitle.value.trim();
+    if (todoTitle) {
+      onAddTodo(todoTitle);
+      event.target.reset();
+
       inputRef.current.focus();
     }
   };
 
   return (
     <form onSubmit={handleAddTodo}>
+
       <TextInputWithLabel
         elementId="todoTitle"
         labelText="Todo"
@@ -33,6 +40,12 @@ function TodoForm({ onAddTodo }) {
       <button type="submit" disabled={!isValidTodoTitle(workingTodoTitle)}>
         Add Todo
       </button>
+      />
+
+      <button type="submit" disabled={!isValidTodoTitle(workingTodoTitle)}>
+        Add Todo
+      </button>
+
     </form>
   );
 }

@@ -17,10 +17,9 @@ function Logon({ onSetEmail = () => {}, onSetToken = () => {} }) {
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
-
       if (response.status === 200 && data.name && data.csrfToken) {
-        onSetEmail(data.name || data.user || data.email || "");
-        onSetToken(data.csrfToken || data.token || data.session || "");
+        onSetEmail(data.name);
+        onSetToken(data.csrfToken);
       } else {
         setAuthError(`Authentication failed: ${data?.message}`);
       }
