@@ -66,7 +66,7 @@ function TodosPage() {
         },
         credentials: "include",
         body: JSON.stringify({
-          title: todoTitle,
+          title: cleanTitle,
           isCompleted: false,
         }),
       });
@@ -190,13 +190,12 @@ function TodosPage() {
     if (!token) return;
     const fetchTodos = async () => {
       dispatch({ type: TODO_ACTIONS.FETCH_START });
-      console.log("SORTING:", sortBy, sortDirection);
+
       try {
         const paramsObject = {
           sortBy,
           sortDirection,
         };
-        console.log(sortBy);
 
         if (debouncedFilterTerm) {
           paramsObject.find = debouncedFilterTerm;
