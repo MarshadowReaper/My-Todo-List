@@ -1,18 +1,21 @@
+import { useState } from "react";
 import Header from "./shared/Header.jsx";
 import Logon from "./features/Logon.jsx";
-import TodosPage from "./features/Todos/TodoList/TodosPage.jsx";
-import { useState } from "react";
-
-//This is holding the data
+import TodosPage from "./features/Todos/TodosPage.jsx";
 
 function App() {
   const [email, setEmail] = useState("");
   const [token, setToken] = useState("");
-  //This is how to create a state
 
   return (
     <div>
-      <Header />
+      <Header
+        email={email}
+        token={token}
+        onSetEmail={setEmail}
+        onSetToken={setToken}
+      />
+
       {token ? (
         <TodosPage token={token} />
       ) : (
@@ -23,5 +26,3 @@ function App() {
 }
 //<TodoList todoList={todoList} /> This is managing and passing data down to children
 export default App;
-
-//Programmer's note: I had a LOT of troubleshooting to do with this one so figured to help understand the lesson better I should label what role the codes are playing
