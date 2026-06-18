@@ -1,14 +1,14 @@
-import { useAuth } from "../context/AuthContext.jsx";
-import Logoff from "../features/Logoff.jsx";
-
-function Header() {
-  const { isAuthenticated } = useAuth();
+function Header({ token, onSetToken, onSetEmail }) {
+  function handleLogOut() {
+    onSetToken("");
+    onSetEmail("");
+  }
 
   return (
     <header className="site-header">
       <h1>Todo List</h1>
 
-      {isAuthenticated && <Logoff />}
+      {token && <button onClick={handleLogOut}>Log Out</button>}
     </header>
   );
 }
