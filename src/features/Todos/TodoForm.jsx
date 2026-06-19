@@ -26,6 +26,7 @@ function TodoForm({ onAddTodo }) {
         labelText="Todo"
         value={workingTodoTitle}
         onChange={handleChange}
+        maxLength={100}
         inputRef={inputRef}
       />
 

@@ -41,6 +41,12 @@ function TodosPage() {
   const debouncedFilterTerm = useDebounce(filterTerm, 300);
 
   async function addTodo(todoTitle) {
+    const trimmedTitle = todoTitle.trim();
+
+    if (trimmedTitle.length > 100) {
+      return;
+    }
+
     const cleanTitle = DOMPurify.sanitize(todoTitle.trim(), {
       ALLOWED_TAGS: [],
       ALLOWED_ATTR: [],
