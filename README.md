@@ -61,6 +61,10 @@ npm run build
 Preview the production build:
 
 npm run preview
+
+Navigate to the project:
+
+cd Code The Dream React/My-Todo-List
 Design Decisions
 
 I wanted the app to feel simple and organized, so I separated the area for creating todos from the area that displays them. My goal was to make it easy for users to focus on adding tasks while still keeping their list easy to read and manage.
