@@ -1,7 +1,29 @@
 :root {
+  font-family: Arial, Helvetica, sans-serif;
   --primary: #2563eb;
   --secondary: #e5ebf3;
   --accent: #22c55e;
   --background: #f8fafc;
   --surface: white;
+}
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+p {
+  font-size: 1rem;
+}
+input:focus,
+button:focus,
+a:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

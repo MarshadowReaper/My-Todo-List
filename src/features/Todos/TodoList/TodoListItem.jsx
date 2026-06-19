@@ -28,6 +28,7 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
             elementId={`todo-${todo.id}`}
             labelText="Todo"
             value={workingTitle}
+            maxLength={100}
             onChange={(event) => setWorkingTitle(event.target.value)}
           />
           <button type="button" onClick={handleCancel}>

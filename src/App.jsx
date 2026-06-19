@@ -1,43 +1,28 @@
-import styles from "./App.module.css";
-import { Routes, Route } from "react-router";
-import HomePage from "./pages/HomePage";
-import AboutPage from "./pages/AboutPage";
-import LoginPage from "./pages/LoginPage";
-import TodosPage from "./pages/TodosPage";
-import ProfilePage from "./pages/ProfilePage";
-import NotFoundPage from "./pages/NotFoundPage";
-import RequireAuth from "./components/RequireAuth";
-import Header from "./shared/Header";
+import { useState } from "react";
+import Header from "./shared/Header.jsx";
+import Logon from "./features/Logon.jsx";
+import TodosPage from "./features/Todos/TodosPage.jsx";
 
 function App() {
+  const [email, setEmail] = useState("");
+  const [token, setToken] = useState("");
+
   return (
-    <div className={styles.app}>
-      <Header />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route
-          path="/todos"
-          element={
-            <RequireAuth>
-              <TodosPage />
-            </RequireAuth>
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <RequireAuth>
-              <ProfilePage />
-            </RequireAuth>
-          }
-        />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+    <div>
+      <Header
+        email={email}
+        token={token}
+        onSetEmail={setEmail}
+        onSetToken={setToken}
+      />
+
+      {token ? (
+        <TodosPage token={token} />
+      ) : (
+        <Logon onSetEmail={setEmail} onSetToken={setToken} />
+      )}
     </div>
   );
 }
+//<TodoList todoList={todoList} /> This is managing and passing data down to children
 export default App;
-
-//Programmer's note: I had a LOT of troubleshooting to do with this one so figured to help understand the lesson better I should label what role the codes are playing

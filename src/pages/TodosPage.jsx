@@ -137,10 +137,17 @@ function TodosPage() {
     }
   }
   const updateTodo = async (editedTodo) => {
+    const cleanTitle = DOMPurify.sanitize(editedTodo.title.trim(), {
+      ALLOWED_TAGS: [],
+      ALLOWED_ATTR: [],
+    });
     const previousTodo = todoList.find((todo) => todo.id === editedTodo.id);
     const updatedTodos = todoList.map((todo) => {
       if (todo.id === editedTodo.id) {
-        return { ...editedTodo };
+        return {
+          ...editedTodo,
+          title: cleanTitle,
+        };
       }
       return todo;
     });
@@ -167,7 +174,7 @@ function TodosPage() {
         },
         credentials: "include",
         body: JSON.stringify({
-          title: editedTodo.title,
+          title: cleanTitle,
           isCompleted: editedTodo.isCompleted,
         }),
       });
