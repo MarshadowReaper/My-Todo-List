@@ -27,3 +27,38 @@ button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+button {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+button:hover {
+  background-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+button:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+button.cancel {
+  background-color: var(--secondary);
+  color: black;
+}
+
+button.cancel:hover {
+  background-color: #d1d5db;
+}
