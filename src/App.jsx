@@ -1,25 +1,24 @@
-<<<<<<< HEAD
-import './App.css';
-import { Routes, Route } from 'react-router';
-import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import LoginPage from './pages/LoginPage';
-import TodosPage from './pages/TodosPage';
-import ProfilePage from './pages/ProfilePage';
-import NotFoundPage from './pages/NotFoundPage';
-import RequireAuth from './components/RequireAuth';
-import Header from './shared/Header';
+import "./App.css";
+import { Routes, Route } from "react-router";
+import HomePage from "./pages/HomePage";
+import AboutPage from "./pages/AboutPage";
+import LoginPage from "./pages/LoginPage";
+import TodosPage from "./pages/TodosPage";
+import ProfilePage from "./pages/ProfilePage";
+import NotFoundPage from "./pages/NotFoundPage";
+import RequireAuth from "./components/RequireAuth";
+import Header from "./shared/Header";
 
 function App() {
   return (
     <>
       <Header />
       <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route path='/about' element={<AboutPage />} />
-        <Route path='/login' element={<LoginPage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route
-          path='/todos'
+          path="/todos"
           element={
             <RequireAuth>
               <TodosPage />
@@ -27,16 +26,18 @@ function App() {
           }
         />
         <Route
-          path='/profile'
+          path="/profile"
           element={
             <RequireAuth>
               <ProfilePage />
             </RequireAuth>
           }
         />
-        <Route path='*' element={<NotFoundPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
+<<<<<<< HEAD
+=======
 =======
 import TodoForm from "./features/TodoForm.jsx";
 import TodoList from "./features/TodoList/TodoList.jsx";
@@ -82,6 +83,7 @@ function App() {
 
     </div>
 >>>>>>> origin/main
+>>>>>>> 99d300ae37c1842168a019b80a90a927fefa6071
   );
 }
 
