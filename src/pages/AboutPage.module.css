@@ -1,0 +1,14 @@
+.about {
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: var(--secondary);
+  border-radius: 12px;
+  line-height: 1.8;
+}
+@media (max-width: 768px) {
+  .about {
+    margin: 1rem auto;
+    padding: 1rem;
+  }
+}
