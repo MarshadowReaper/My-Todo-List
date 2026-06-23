@@ -10,8 +10,8 @@ import {
   initialTodoState,
   TODO_ACTIONS,
 } from "../reducers/todoReducer.js";
-import { useSearchParams } from 'react-router';
-import StatusFilter from '../shared/StatusFilter';
+import { useSearchParams } from "react-router";
+import StatusFilter from "../shared/StatusFilter";
 
 function TodosPage() {
   const { token } = useAuth();
@@ -65,12 +65,10 @@ function TodosPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        
         throw new Error("Failed to fetch todos");
       }
 
       if (data.tasks.length === 0) {
-        
         dispatch({
           type: TODO_ACTIONS.FETCH_ERROR,
           payload: {
@@ -106,6 +104,9 @@ function TodosPage() {
         },
       });
     } finally {
+      {
+        /*empty*/
+      }
     }
   };
   async function addTodo(todoTitle) {
@@ -341,7 +342,7 @@ function TodosPage() {
         filterTerm={filterTerm}
         onFilterChange={handleFilterChange}
       />
-      
+
       <TodoForm onAddTodo={addTodo} />
       {showTodos && (
         <TodoList
@@ -349,7 +350,7 @@ function TodosPage() {
           onCompleteTodo={completeTodo}
           onUpdateTodo={updateTodo}
           dataVersion={dataVersion}
-            statusFilter={statusFilter}
+          statusFilter={statusFilter}
         />
       )}
     </>
