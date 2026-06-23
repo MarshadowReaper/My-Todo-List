@@ -3,15 +3,17 @@ import { useNavigate } from "react-router";
 function Logoff() {
   const { logout } = useAuth();
   const navigate = useNavigate();
- const handleLogout = async () => {
-  const result = await logout();
+  const handleLogout = async () => {
+    const result = await logout();
 
-  if (result.success) {
-    navigate("/login");
-  } else {
-   
-  }
-};
+    if (result.success) {
+      navigate("/login");
+    } else {
+      {
+        /*empty */
+      }
+    }
+  };
   return <button onClick={handleLogout}>Log Off</button>;
 }
 
